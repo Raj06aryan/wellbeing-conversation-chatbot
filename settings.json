@@ -1,0 +1,12 @@
+{
+    // path to the project's venv python
+    "python.defaultInterpreterPath": "C:\\Users\\hp\\Desktop\\wellbeing-conversation-chatbot\\Server\\venv\\Scripts\\python.exe",
+
+    // make project packages/imports resolvable (adjust if your app code lives elsewhere)
+    "python.analysis.extraPaths": [
+        "Server"
+    ],
+
+    // optional: reduce noisy type checking (adjust as needed)
+    "python.analysis.typeCheckingMode": "basic"
+}
