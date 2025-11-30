@@ -281,7 +281,7 @@ export default function AuthModal() {
       if (!exists) {
         setError("Employee ID not found.");
       } else {
-    setRegisterStep("registerForm");
+        setRegisterStep("registerForm");
       }
     } catch {
       setError("Error checking employee ID. Please try again.");

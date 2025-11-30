@@ -94,11 +94,17 @@ export default function HRLoginModal() {
 
   // zod validation
   const loginSchema = z.object({
-    email: z.string().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/).max(50),
-    password: z.string().regex(
+    email: z
+      .string()
+      .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+      .max(50),
+    password: z
+      .string()
+      .regex(
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
         "Password must contain at least 8 characters, including letters, numbers, and special characrs"
-      ).max(20),
+      )
+      .max(20),
   });
 
   const [LoginformData, setLoginFormData] = React.useState({
@@ -114,17 +120,18 @@ export default function HRLoginModal() {
   const [loading, setLoading] = useState(false);
   const [Loginerrors, setLoginErrors] = React.useState({
     email: 0,
-    password: 0
+    password: 0,
   });
 
   const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     const updatedFormData = { ...LoginformData, [name]: value };
     setLoginFormData(updatedFormData);
-    const fieldSchema = loginSchema.shape[name as keyof typeof loginSchema.shape];
+    const fieldSchema =
+      loginSchema.shape[name as keyof typeof loginSchema.shape];
     const result = fieldSchema.safeParse(value);
 
-    setLoginErrors(prevErrors => ({
+    setLoginErrors((prevErrors) => ({
       ...prevErrors,
       [name]: result.success ? 0 : 1,
     }));
@@ -151,14 +158,17 @@ export default function HRLoginModal() {
 
     try {
       // Call the HR login function
-      const response = await signInHR(LoginformData.email, LoginformData.password);
+      const response = await signInHR(
+        LoginformData.email,
+        LoginformData.password
+      );
       if (response.token) {
         // Dismiss loading toast
         toast.dismiss("hr-login-attempt");
-        
+
         // Close the modal after successful login
         setOpen(false);
-        
+
         // Redirect to HR Dashboard on success
         router.push("/hr-dashboard");
       }
@@ -179,9 +189,7 @@ export default function HRLoginModal() {
     <Dialog open={open} onOpenChange={setOpen}>
       {/* Trigger button to open the modal */}
       <DialogTrigger asChild>
-        <AnimatedButton
-          className="bg-white border-1 border-black/50 text-black cursor-pointer text-lg font-semibold px-10 py-4 h-auto rounded-full shadow-md hover:shadow-lg hover:bg-white/95 hover:border-black/90 transition-all duration-300 group relative overflow-hidden md:scale-90 lg:scale-100 scale-75 "
-        >
+        <AnimatedButton className="bg-white border-1 border-black/50 text-black cursor-pointer text-lg font-semibold px-10 py-4 h-auto rounded-full shadow-md hover:shadow-lg hover:bg-white/95 hover:border-black/90 transition-all duration-300 group relative overflow-hidden md:scale-90 lg:scale-100 scale-75 ">
           Login as HR
         </AnimatedButton>
       </DialogTrigger>
@@ -211,7 +219,10 @@ export default function HRLoginModal() {
             >
               <form onSubmit={handleLoginSubmit} className="grid gap-4">
                 <div className="grid gap-2">
-                  <Label htmlFor="email" className="text-sm font-medium">                    Email                  </Label>
+                  <Label htmlFor="email" className="text-sm font-medium">
+                    {" "}
+                    Email{" "}
+                  </Label>
                   <Input
                     id="email"
                     type="email"
@@ -233,8 +244,11 @@ export default function HRLoginModal() {
                 </div>
 
                 <div className="grid gap-2">
-                  <Label htmlFor="password" className="text-sm font-medium">Password</Label>
-                  <Input                    id="password"
+                  <Label htmlFor="password" className="text-sm font-medium">
+                    Password
+                  </Label>
+                  <Input
+                    id="password"
                     type="password"
                     name="password"
                     onChange={handleLoginChange}
