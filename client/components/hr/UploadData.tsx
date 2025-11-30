@@ -300,7 +300,7 @@ export function UploadData() {
         console.log("Sending file to table:", fileItem.targetTable); // Debug log
 
         const response = await axios.post(
-          `http://127.0.0.1:8000/api/data/ingest?table=${fileItem.targetTable}`, // Add as URL parameter too
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/data/ingest?table=${fileItem.targetTable}`, // Add as URL parameter too
           formData,
           {
             headers: {

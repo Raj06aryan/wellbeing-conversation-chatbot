@@ -28,7 +28,7 @@ import { toast } from "sonner"; // Import toast from sonner
 async function checkEmployeeId(employeeId: string): Promise<boolean> {
   try {
     const response = await fetch(
-      `http://127.0.0.1:8000/api/user/check/${employeeId}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/check/${employeeId}`,
       {
         method: "GET",
         headers: {
@@ -225,7 +225,7 @@ export default function AuthModal() {
 
         await signIn(LoginformData.email, LoginformData.password);
         const res = await axios.post(
-          "http://127.0.0.1:8000/api/user/login",
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/login`,
           {
             email: LoginformData.email,
             password: LoginformData.password,
@@ -305,7 +305,7 @@ export default function AuthModal() {
           RegisterformData.name
         );
         const res = await axios.post(
-          "http://127.0.0.1:8000/api/user/register",
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/register`,
           {
             email: RegisterformData.email,
             emp_id: regEmployeeId,
@@ -348,12 +348,15 @@ export default function AuthModal() {
       const user = await signInWithGoogle();
       const email = user.email;
       const name = user.displayName;
-      const res = await axios.post("http://127.0.0.1:8000/api/user/oauth", {
-        email: email,
-        emp_id: regEmployeeId,
-        name: name,
-        isRegistration: isRegistration,
-      });
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/oauth`,
+        {
+          email: email,
+          emp_id: regEmployeeId,
+          name: name,
+          isRegistration: isRegistration,
+        }
+      );
       const token = res.data.token;
       localStorage.setItem("access_token", token);
       setIsLogged(true);
@@ -373,12 +376,15 @@ export default function AuthModal() {
       const user = await signInWithTwitter();
       const email = user.email;
       const name = user.displayName;
-      const res = await axios.post("http://127.0.0.1:8000/api/user/oauth", {
-        email: email,
-        emp_id: regEmployeeId,
-        name: name,
-        isRegistration: isRegistration,
-      });
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/oauth`,
+        {
+          email: email,
+          emp_id: regEmployeeId,
+          name: name,
+          isRegistration: isRegistration,
+        }
+      );
       const token = res.data.token;
       localStorage.setItem("access_token", token);
       setIsLogged(true);
