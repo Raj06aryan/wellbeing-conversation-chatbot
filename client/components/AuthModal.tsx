@@ -394,7 +394,7 @@ export default function AuthModal() {
   };
 
   // Animation variants
-  const formVariants = {
+  const formVariants: any = {
     hidden: {
       opacity: 0,
       y: 20,

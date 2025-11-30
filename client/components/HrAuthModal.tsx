@@ -66,7 +66,7 @@ export default function HRLoginModal() {
   const router = useRouter();
 
   // Animation variants
-  const formVariants = {
+  const formVariants: any = {
     hidden: {
       opacity: 0,
       y: 20,
