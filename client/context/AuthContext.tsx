@@ -160,13 +160,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signInHR = async (email: string, password: string) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/hr-login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/hr-login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Login failed");
@@ -205,14 +208,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const fetchHRProfile = async () => {
     try {
       const token = localStorage.getItem("access_token");
-          try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/hr`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/user/hr`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch HR profile");
