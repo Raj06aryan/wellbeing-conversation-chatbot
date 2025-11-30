@@ -94,7 +94,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             const profile = await fetchEmployeeProfile();
             console.log("Employee Profile:", profile);
 
-            if (profile.is_selected && profile.conversation_completed) {
+            if (profile.is_selected && !profile.conversation_completed) {
               router.push("/conversation");
             } else router.push("/dashboard");
           }
